@@ -1,0 +1,3507 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Metadata:
+    Generator: "former2"
+Description: ""
+Resources:
+    IAMUser:
+        Type: "AWS::IAM::User"
+        Properties:
+            Path: "/"
+            UserName: "Admin"
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/AdministratorAccess"
+
+    IAMUser2:
+        Type: "AWS::IAM::User"
+        Properties:
+            Path: "/"
+            UserName: "Former2"
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/AdministratorAccess"
+
+    IAMRole:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMakerCanvasEMRSExecutionAccess-20250831T192985"
+            AssumeRolePolicyDocument: !Sub "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"EMRServerlessTrustPolicy\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"emr-serverless.amazonaws.com\"},\"Action\":\"sts:AssumeRole\",\"Condition\":{\"StringEquals\":{\"aws:SourceAccount\":\"${AWS::AccountId}\"}}}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/AmazonSageMakerCanvasEMRServerlessExecutionRolePolicy"
+
+    IAMRole2:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMaker-ExecutionRole-20250831T192985"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"sagemaker.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - !Ref IAMManagedPolicy5
+              - "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
+              - "arn:aws:iam::aws:policy/AmazonSageMakerCanvasAIServicesAccess"
+              - "arn:aws:iam::aws:policy/AmazonSageMakerCanvasFullAccess"
+              - "arn:aws:iam::aws:policy/AmazonSageMakerCanvasDataPrepFullAccess"
+            Description: "SageMaker execution role created from the SageMaker AWS Management Console."
+
+    IAMRole3:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMakerServiceCatalogProductsCloudformationRole"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudformation.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/service-role/AmazonSageMakerServiceCatalogProductsCloudformationServiceRolePolicy"
+            Description: "SageMaker role created from the SageMaker AWS Management Console. This role will grant permissions required to use AWS CloudFormation within the Amazon SageMaker portfolio of products."
+
+    IAMRole4:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMakerServiceCatalogProductsApiGatewayRole"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/service-role/AmazonSageMakerServiceCatalogProductsApiGatewayServiceRolePolicy"
+            Description: "SageMaker role created from the SageMaker AWS Management Console. This role will grant permissions required to use AWS ApiGateway within the Amazon SageMaker portfolio of products."
+
+    IAMRole5:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMakerServiceCatalogProductsCodeBuildRole"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"codebuild.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/AmazonSageMakerServiceCatalogProductsCodeBuildServiceRolePolicy"
+            Description: "SageMaker role created from the SageMaker AWS Management Console. This role will grant permissions required to use AWS CodeBuild within the Amazon SageMaker portfolio of products."
+
+    IAMRole6:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMakerServiceCatalogProductsCodePipelineRole"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"codepipeline.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/service-role/AmazonSageMakerServiceCatalogProductsCodePipelineServiceRolePolicy"
+            Description: "SageMaker role created from the SageMaker AWS Management Console. This role will grant permissions required to use AWS CodePipeline within the Amazon SageMaker portfolio of products."
+
+    IAMRole7:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMakerServiceCatalogProductsFirehoseRole"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"firehose.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/service-role/AmazonSageMakerServiceCatalogProductsFirehoseServiceRolePolicy"
+            Description: "SageMaker role created from the SageMaker AWS Management Console. This role will grant permissions required to use AWS Firehose within the Amazon SageMaker portfolio of products."
+
+    IAMRole8:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMakerServiceCatalogProductsEventsRole"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"events.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/service-role/AmazonSageMakerServiceCatalogProductsEventsServiceRolePolicy"
+            Description: "SageMaker role created from the SageMaker AWS Management Console. This role will grant permissions required to use AWS Events within the Amazon SageMaker portfolio of products."
+
+    IAMRole9:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMakerServiceCatalogProductsExecutionRole"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"sagemaker.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
+            Description: "SageMaker role created from the SageMaker AWS Management Console. This role will grant permissions required to use AWS SageMaker within the Amazon SageMaker portfolio of products."
+
+    IAMRole10:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMakerServiceCatalogProductsGlueRole"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"glue.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/service-role/AmazonSageMakerServiceCatalogProductsGlueServiceRolePolicy"
+            Description: "SageMaker role created from the SageMaker AWS Management Console. This role will grant permissions required to use AWS Glue within the Amazon SageMaker portfolio of products."
+
+    IAMRole11:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMakerServiceCatalogProductsLambdaRole"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/service-role/AmazonSageMakerServiceCatalogProductsLambdaServiceRolePolicy"
+            Description: "SageMaker role created from the SageMaker AWS Management Console. This role will grant permissions required to use AWS Lambda within the Amazon SageMaker portfolio of products."
+
+    IAMRole12:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMakerServiceCatalogProductsLaunchRole"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"servicecatalog.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/AmazonSageMakerAdmin-ServiceCatalogProductsServiceRolePolicy"
+            Description: "SageMaker role created from the SageMaker AWS Management Console. This role has the permissions required to launch the Amazon SageMaker portfolio of products from AWS ServiceCatalog."
+
+    IAMRole13:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AmazonSageMakerServiceCatalogProductsUseRole"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":[\"glue.amazonaws.com\",\"firehose.amazonaws.com\",\"codepipeline.amazonaws.com\",\"codebuild.amazonaws.com\",\"cloudformation.amazonaws.com\",\"apigateway.amazonaws.com\",\"sagemaker.amazonaws.com\",\"states.amazonaws.com\",\"events.amazonaws.com\",\"lambda.amazonaws.com\"]},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - !Ref IAMManagedPolicy7
+            Description: "SageMaker role created from the SageMaker AWS Management Console. This role has the permissions required to use the Amazon SageMaker portfolio of products from AWS ServiceCatalog."
+
+    IAMRole14:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "Amazon_EventBridge_Scheduler_LAMBDA_8f53c8a741"
+            AssumeRolePolicyDocument: !Sub "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"scheduler.amazonaws.com\"},\"Action\":\"sts:AssumeRole\",\"Condition\":{\"StringEquals\":{\"aws:SourceAccount\":\"${AWS::AccountId}\"}}}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - !Ref IAMManagedPolicy8
+
+    IAMRole15:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "aws-quicksight-service-role-v0"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"quicksight.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - !Ref IAMManagedPolicy2
+              - !Ref IAMManagedPolicy9
+              - !Ref IAMManagedPolicy10
+              - !Ref IAMManagedPolicy
+              - "arn:aws:iam::aws:policy/service-role/AWSQuicksightAthenaAccess"
+
+    IAMRole16:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: "AWSGlueServiceRole-ENRICH-CRAWLER"
+            AssumeRolePolicyDocument: !Sub "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"glue.amazonaws.com\"},\"Action\":\"sts:AssumeRole\",\"Condition\":{\"StringEquals\":{\"aws:SourceAccount\":\"${AWS::AccountId}\"}}}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - !Ref IAMManagedPolicy4
+              - "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
+
+    IAMRole17:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/service-role/"
+            RoleName: !Sub "${LambdaFunction}-role-rus1h72o"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            ManagedPolicyArns: 
+              - !Ref IAMManagedPolicy3
+              - !Ref IAMManagedPolicy6
+
+    IAMRole18:
+        Type: "AWS::IAM::Role"
+        Properties:
+            Path: "/"
+            RoleName: "RedditCrawlerRole"
+            AssumeRolePolicyDocument: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
+            MaxSessionDuration: 3600
+            Description: "Crawler permissions to interact with S3 and Firehose"
+
+    IAMServiceLinkedRole:
+        Type: "AWS::IAM::ServiceLinkedRole"
+        Properties:
+            AWSServiceName: "ops.emr-serverless.amazonaws.com"
+
+    IAMServiceLinkedRole2:
+        Type: "AWS::IAM::ServiceLinkedRole"
+        Properties:
+            AWSServiceName: "sagemaker.amazonaws.com"
+            Description: "AWS SageMaker Notebooks Service Linked Role"
+
+    IAMManagedPolicy:
+        Type: "AWS::IAM::ManagedPolicy"
+        Properties:
+            ManagedPolicyName: "AWSQuickSightRDSPolicy"
+            Path: "/service-role/"
+            PolicyDocument: |
+                {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Action": [
+                                "rds:Describe*"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        }
+                    ]
+                }
+
+    IAMManagedPolicy2:
+        Type: "AWS::IAM::ManagedPolicy"
+        Properties:
+            ManagedPolicyName: "AWSQuickSightRedshiftPolicy"
+            Path: "/service-role/"
+            PolicyDocument: |
+                {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Action": [
+                                "redshift:Describe*"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        }
+                    ]
+                }
+
+    IAMManagedPolicy3:
+        Type: "AWS::IAM::ManagedPolicy"
+        Properties:
+            ManagedPolicyName: "AWSLambdaVPCAccessExecutionRole-9fc10f2f-f5ad-47e9-ac03-9d242973891f"
+            Path: "/service-role/"
+            PolicyDocument: |
+                {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "ec2:CreateNetworkInterface",
+                                "ec2:DeleteNetworkInterface",
+                                "ec2:DescribeNetworkInterfaces"
+                            ],
+                            "Resource": "*"
+                        }
+                    ]
+                }
+
+    IAMManagedPolicy4:
+        Type: "AWS::IAM::ManagedPolicy"
+        Properties:
+            ManagedPolicyName: "AWSGlueServiceRole-ENRICH-CRAWLER-EZCRC-s3Policy"
+            Path: "/service-role/"
+            PolicyDocument: !Sub |
+                {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "s3:GetObject",
+                                "s3:PutObject"
+                            ],
+                            "Resource": [
+                                "arn:aws:s3:::${S3Bucket5}/*"
+                            ],
+                            "Condition": {
+                                "StringEquals": {
+                                    "aws:ResourceAccount": "${AWS::AccountId}"
+                                }
+                            }
+                        }
+                    ]
+                }
+
+    IAMManagedPolicy5:
+        Type: "AWS::IAM::ManagedPolicy"
+        Properties:
+            ManagedPolicyName: "AmazonSageMaker-ExecutionPolicy-20250831T192985"
+            Path: "/service-role/"
+            PolicyDocument: |
+                {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Action": [
+                                "s3:ListBucket"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": [
+                                "arn:aws:s3:::SageMaker"
+                            ]
+                        },
+                        {
+                            "Action": [
+                                "s3:GetObject",
+                                "s3:PutObject",
+                                "s3:DeleteObject"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": [
+                                "arn:aws:s3:::SageMaker/*"
+                            ]
+                        }
+                    ]
+                }
+
+    IAMManagedPolicy6:
+        Type: "AWS::IAM::ManagedPolicy"
+        Properties:
+            ManagedPolicyName: "AWSLambdaBasicExecutionRole-3502239f-c390-4d01-b84c-611ea0a813d6"
+            Path: "/service-role/"
+            PolicyDocument: !Sub |
+                {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": "logs:CreateLogGroup",
+                            "Resource": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:*"
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents"
+                            ],
+                            "Resource": [
+                                "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${LambdaFunction}:*"
+                            ]
+                        }
+                    ]
+                }
+
+    IAMManagedPolicy7:
+        Type: "AWS::IAM::ManagedPolicy"
+        Properties:
+            ManagedPolicyName: "AmazonSageMakerServiceCatalogProductsUseRole-20250831T192921"
+            Path: "/service-role/"
+            PolicyDocument: |
+                {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Action": [
+                                "cloudformation:CreateChangeSet",
+                                "cloudformation:CreateStack",
+                                "cloudformation:DescribeChangeSet",
+                                "cloudformation:DeleteChangeSet",
+                                "cloudformation:DeleteStack",
+                                "cloudformation:DescribeStacks",
+                                "cloudformation:ExecuteChangeSet",
+                                "cloudformation:SetStackPolicy",
+                                "cloudformation:UpdateStack"
+                            ],
+                            "Resource": "arn:aws:cloudformation:*:*:stack/sagemaker-*",
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Action": [
+                                "cloudwatch:PutMetricData"
+                            ],
+                            "Resource": "*",
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Action": [
+                                "codebuild:BatchGetBuilds",
+                                "codebuild:StartBuild"
+                            ],
+                            "Resource": [
+                                "arn:aws:codebuild:*:*:project/sagemaker-*",
+                                "arn:aws:codebuild:*:*:build/sagemaker-*"
+                            ],
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Action": [
+                                "codecommit:CancelUploadArchive",
+                                "codecommit:GetBranch",
+                                "codecommit:GetCommit",
+                                "codecommit:GetUploadArchiveStatus",
+                                "codecommit:UploadArchive"
+                            ],
+                            "Resource": "arn:aws:codecommit:*:*:sagemaker-*",
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Action": [
+                                "codepipeline:StartPipelineExecution"
+                            ],
+                            "Resource": "arn:aws:codepipeline:*:*:sagemaker-*",
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Action": [
+                                "ec2:DescribeRouteTables"
+                            ],
+                            "Resource": "*",
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Action": [
+                                "ecr:BatchCheckLayerAvailability",
+                                "ecr:BatchGetImage",
+                                "ecr:Describe*",
+                                "ecr:GetAuthorizationToken",
+                                "ecr:GetDownloadUrlForLayer"
+                            ],
+                            "Resource": "*",
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "ecr:BatchDeleteImage",
+                                "ecr:CompleteLayerUpload",
+                                "ecr:CreateRepository",
+                                "ecr:DeleteRepository",
+                                "ecr:InitiateLayerUpload",
+                                "ecr:PutImage",
+                                "ecr:UploadLayerPart"
+                            ],
+                            "Resource": [
+                                "arn:aws:ecr:*:*:repository/sagemaker-*"
+                            ]
+                        },
+                        {
+                            "Action": [
+                                "events:DeleteRule",
+                                "events:DescribeRule",
+                                "events:PutRule",
+                                "events:PutTargets",
+                                "events:RemoveTargets"
+                            ],
+                            "Resource": [
+                                "arn:aws:events:*:*:rule/sagemaker-*"
+                            ],
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Action": [
+                                "firehose:PutRecord",
+                                "firehose:PutRecordBatch"
+                            ],
+                            "Resource": "arn:aws:firehose:*:*:deliverystream/sagemaker-*",
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Action": [
+                                "glue:BatchCreatePartition",
+                                "glue:BatchDeletePartition",
+                                "glue:BatchDeleteTable",
+                                "glue:BatchDeleteTableVersion",
+                                "glue:BatchGetPartition",
+                                "glue:CreateDatabase",
+                                "glue:CreatePartition",
+                                "glue:CreateTable",
+                                "glue:DeletePartition",
+                                "glue:DeleteTable",
+                                "glue:DeleteTableVersion",
+                                "glue:GetDatabase",
+                                "glue:GetPartition",
+                                "glue:GetPartitions",
+                                "glue:GetTable",
+                                "glue:GetTables",
+                                "glue:GetTableVersion",
+                                "glue:GetTableVersions",
+                                "glue:SearchTables",
+                                "glue:UpdatePartition",
+                                "glue:UpdateTable",
+                                "glue:GetUserDefinedFunctions"
+                            ],
+                            "Resource": [
+                                "arn:aws:glue:*:*:catalog",
+                                "arn:aws:glue:*:*:database/default",
+                                "arn:aws:glue:*:*:database/global_temp",
+                                "arn:aws:glue:*:*:database/sagemaker-*",
+                                "arn:aws:glue:*:*:table/sagemaker-*",
+                                "arn:aws:glue:*:*:tableVersion/sagemaker-*"
+                            ],
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Action": [
+                                "iam:PassRole"
+                            ],
+                            "Resource": [
+                                "arn:aws:iam::*:role/service-role/AmazonSageMakerServiceCatalogProductsUse*"
+                            ],
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "lambda:InvokeFunction"
+                            ],
+                            "Resource": [
+                                "arn:aws:lambda:*:*:function:sagemaker-*"
+                            ]
+                        },
+                        {
+                            "Action": [
+                                "logs:CreateLogDelivery",
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream",
+                                "logs:DeleteLogDelivery",
+                                "logs:Describe*",
+                                "logs:GetLogDelivery",
+                                "logs:GetLogEvents",
+                                "logs:ListLogDeliveries",
+                                "logs:PutLogEvents",
+                                "logs:PutResourcePolicy",
+                                "logs:UpdateLogDelivery"
+                            ],
+                            "Resource": "*",
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "s3:CreateBucket",
+                                "s3:DeleteBucket",
+                                "s3:GetBucketAcl",
+                                "s3:GetBucketCors",
+                                "s3:GetBucketLocation",
+                                "s3:ListAllMyBuckets",
+                                "s3:ListBucket",
+                                "s3:ListBucketMultipartUploads",
+                                "s3:PutBucketCors",
+                                "s3:PutObjectAcl"
+                            ],
+                            "Resource": [
+                                "arn:aws:s3:::aws-glue-*",
+                                "arn:aws:s3:::sagemaker-*"
+                            ]
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "s3:AbortMultipartUpload",
+                                "s3:DeleteObject",
+                                "s3:GetObject",
+                                "s3:GetObjectVersion",
+                                "s3:PutObject"
+                            ],
+                            "Resource": [
+                                "arn:aws:s3:::aws-glue-*",
+                                "arn:aws:s3:::sagemaker-*"
+                            ]
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "sagemaker:*"
+                            ],
+                            "NotResource": [
+                                "arn:aws:sagemaker:*:*:domain/*",
+                                "arn:aws:sagemaker:*:*:user-profile/*",
+                                "arn:aws:sagemaker:*:*:app/*",
+                                "arn:aws:sagemaker:*:*:flow-definition/*"
+                            ]
+                        },
+                        {
+                            "Action": [
+                                "states:DescribeExecution",
+                                "states:DescribeStateMachine",
+                                "states:DescribeStateMachineForExecution",
+                                "states:GetExecutionHistory",
+                                "states:ListExecutions",
+                                "states:ListTagsForResource",
+                                "states:StartExecution",
+                                "states:StopExecution",
+                                "states:TagResource",
+                                "states:UntagResource",
+                                "states:UpdateStateMachine"
+                            ],
+                            "Resource": [
+                                "arn:aws:states:*:*:stateMachine:sagemaker-*",
+                                "arn:aws:states:*:*:execution:sagemaker-*:*"
+                            ],
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Action": [
+                                "states:ListStateMachines"
+                            ],
+                            "Resource": "*",
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "codestar-connections:UseConnection"
+                            ],
+                            "Resource": "arn:aws:codestar-connections:*:*:connection/*",
+                            "Condition": {
+                                "StringEqualsIgnoreCase": {
+                                    "aws:ResourceTag/sagemaker": "true"
+                                }
+                            }
+                        }
+                    ]
+                }
+
+    IAMManagedPolicy8:
+        Type: "AWS::IAM::ManagedPolicy"
+        Properties:
+            ManagedPolicyName: "Amazon-EventBridge-Scheduler-Execution-Policy-7f8fd8c9-bc18-49b6-81fd-7e01fb5340d5"
+            Path: "/service-role/"
+            PolicyDocument: !Sub |
+                {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "lambda:InvokeFunction"
+                            ],
+                            "Resource": [
+                                "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${LambdaFunction2}:*",
+                                "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${LambdaFunction2}"
+                            ]
+                        }
+                    ]
+                }
+
+    IAMManagedPolicy9:
+        Type: "AWS::IAM::ManagedPolicy"
+        Properties:
+            ManagedPolicyName: "AWSQuickSightS3Policy"
+            Path: "/service-role/"
+            PolicyDocument: !Sub |
+                {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": "s3:ListAllMyBuckets",
+                            "Resource": "arn:aws:s3:::*"
+                        },
+                        {
+                            "Action": [
+                                "s3:ListBucket"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": [
+                                "arn:aws:s3:::${S3Bucket5}",
+                                "arn:aws:s3:::${S3Bucket3}"
+                            ]
+                        },
+                        {
+                            "Action": [
+                                "s3:GetObject",
+                                "s3:GetObjectVersion"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": [
+                                "arn:aws:s3:::${S3Bucket5}/*",
+                                "arn:aws:s3:::${S3Bucket3}/*"
+                            ]
+                        }
+                    ]
+                }
+
+    IAMManagedPolicy10:
+        Type: "AWS::IAM::ManagedPolicy"
+        Properties:
+            ManagedPolicyName: "AWSQuickSightIAMPolicy"
+            Path: "/service-role/"
+            PolicyDocument: |
+                {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "iam:List*"
+                            ],
+                            "Resource": "*"
+                        }
+                    ]
+                }
+
+    IAMPolicy:
+        Type: "AWS::IAM::Policy"
+        Properties:
+            PolicyDocument: !Sub |
+                {
+                	"Version": "2012-10-17",
+                	"Statement": [
+                		{
+                			"Effect": "Allow",
+                			"Action": [
+                				"s3:ListBucket"
+                			],
+                			"Resource": "arn:aws:s3:::${LambdaFunction2}-bucket"
+                		},
+                		{
+                			"Effect": "Allow",
+                			"Action": [
+                				"s3:GetObject",
+                				"s3:DeleteObject"
+                			],
+                			"Resource": "arn:aws:s3:::${LambdaFunction2}-bucket/*"
+                		},
+                		{
+                			"Effect": "Allow",
+                			"Action": [
+                				"s3:PutObject",
+                				"s3:GetObject"
+                			],
+                			"Resource": "arn:aws:s3:::${S3Bucket5}/*"
+                		},
+                		{
+                			"Effect": "Allow",
+                			"Action": [
+                				"sagemaker:InvokeEndpoint"
+                			],
+                			"Resource": "arn:aws:sagemaker:${AWS::Region}:${AWS::AccountId}:endpoint/*"
+                		}
+                	]
+                }
+            Roles: 
+              - !Ref IAMRole17
+            PolicyName: "main-enriching-policy"
+
+    IAMPolicy2:
+        Type: "AWS::IAM::Policy"
+        Properties:
+            PolicyDocument: !Sub |
+                {
+                  "Version": "2012-10-17",
+                  "Statement": [
+                    {
+                      "Effect": "Allow",
+                      "Action": "secretsmanager:GetSecretValue",
+                      "Resource": "arn:aws:secretsmanager:us-east-1:${AWS::AccountId}:secret:cookies-credentials*"
+                    }
+                  ]
+                }
+                
+            Roles: 
+              - !Ref IAMRole18
+            PolicyName: "AllowCookiesAccess"
+
+    IAMPolicy3:
+        Type: "AWS::IAM::Policy"
+        Properties:
+            PolicyDocument: !Sub |
+                {
+                	"Version": "2012-10-17",
+                	"Statement": [
+                		{
+                			"Effect": "Allow",
+                			"Action": [
+                				"s3:PutObject",
+                				"s3:PutObjectAcl",
+                				"s3:ListBucket",
+                				"s3:GetObject"
+                			],
+                			"Resource": [
+                				"arn:aws:s3:::${LambdaFunction2}-bucket",
+                				"arn:aws:s3:::${LambdaFunction2}-bucket/*"
+                			]
+                		},
+                		{
+                			"Effect": "Allow",
+                			"Action": [
+                				"firehose:PutRecord",
+                				"firehose:PutRecordBatch",
+                				"firehose:DescribeDeliveryStream",
+                				"firehose:ListDeliveryStreams"
+                			],
+                			"Resource": [
+                				"arn:aws:firehose:us-east-1:${AWS::AccountId}:deliverystream/my-firehose-stream"
+                			]
+                		},
+                		{
+                			"Effect": "Allow",
+                			"Action": [
+                				"logs:CreateLogGroup",
+                				"logs:CreateLogStream",
+                				"logs:PutLogEvents"
+                			],
+                			"Resource": "*"
+                		}
+                	]
+                }
+            Roles: 
+              - !Ref IAMRole18
+            PolicyName: "reddit-crawl-policy"
+
+    IAMAccessKey:
+        Type: "AWS::IAM::AccessKey"
+        Properties:
+            Status: "Active"
+            UserName: "Former2"
+
+    EC2DHCPOptions:
+        Type: "AWS::EC2::DHCPOptions"
+        Properties:
+            DomainName: !Sub "${AWS::Region}.compute.internal"
+
+    EC2SecurityGroup:
+        Type: "AWS::EC2::SecurityGroup"
+        Properties:
+            GroupDescription: !Sub "[DO NOT DELETE] Security Group that allows inbound NFS traffic for SageMaker Notebooks Domain [${SageMakerDomain}]"
+            GroupName: !Sub "security-group-for-inbound-nfs-${SageMakerDomain}"
+            Tags: 
+              - 
+                Key: "ManagedByAmazonSageMakerResource"
+                Value: !GetAtt SageMakerDomain.DomainArn
+            VpcId: "vpc-0efd686be15069435"
+            SecurityGroupIngress: 
+              - 
+                SourceSecurityGroupId: !Ref EC2SecurityGroup2
+                SourceSecurityGroupOwnerId: !Ref AWS::AccountId
+                FromPort: 988
+                IpProtocol: "tcp"
+                ToPort: 988
+              - 
+                SourceSecurityGroupId: !Ref EC2SecurityGroup2
+                SourceSecurityGroupOwnerId: !Ref AWS::AccountId
+                FromPort: 1018
+                IpProtocol: "tcp"
+                ToPort: 1023
+              - 
+                SourceSecurityGroupId: !Ref EC2SecurityGroup2
+                SourceSecurityGroupOwnerId: !Ref AWS::AccountId
+                FromPort: 2049
+                IpProtocol: "tcp"
+                ToPort: 2049
+
+    EC2SecurityGroup2:
+        Type: "AWS::EC2::SecurityGroup"
+        Properties:
+            GroupDescription: !Sub "[DO NOT DELETE] Security Group that allows outbound NFS traffic for SageMaker Notebooks Domain [${SageMakerDomain}]"
+            GroupName: !Sub "security-group-for-outbound-nfs-${SageMakerDomain}"
+            Tags: 
+              - 
+                Key: "ManagedByAmazonSageMakerResource"
+                Value: !GetAtt SageMakerDomain.DomainArn
+            VpcId: "vpc-0efd686be15069435"
+            SecurityGroupEgress: 
+              - 
+                DestinationSecurityGroupId: "sg-08fd9be195fd452e0"
+                FromPort: 988
+                IpProtocol: "tcp"
+                ToPort: 988
+              - 
+                DestinationSecurityGroupId: "sg-08fd9be195fd452e0"
+                FromPort: 1018
+                IpProtocol: "tcp"
+                ToPort: 1023
+              - 
+                DestinationSecurityGroupId: "sg-08fd9be195fd452e0"
+                FromPort: 2049
+                IpProtocol: "tcp"
+                ToPort: 2049
+
+    EC2NetworkInterface:
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: !Sub "EFS mount target for ${EFSFileSystem} (${EFSMountTarget3})"
+            PrivateIpAddress: !GetAtt EFSMountTarget3.IpAddress
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: !GetAtt EFSMountTarget3.IpAddress
+                Primary: true
+            SubnetId: "subnet-0c3c2ea508e17dd26"
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup
+
+    EC2NetworkInterface2:
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: !Sub "EFS mount target for ${EFSFileSystem} (${EFSMountTarget})"
+            PrivateIpAddress: !GetAtt EFSMountTarget.IpAddress
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: !GetAtt EFSMountTarget.IpAddress
+                Primary: true
+            SubnetId: "subnet-03e6a4e55fb4f091e"
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup
+
+    EC2NetworkInterface3:
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: !Sub "EFS mount target for ${EFSFileSystem} (${EFSMountTarget2})"
+            PrivateIpAddress: !GetAtt EFSMountTarget2.IpAddress
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: !GetAtt EFSMountTarget2.IpAddress
+                Primary: true
+            SubnetId: "subnet-00fdd0e9d2e9ce6bb"
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup
+
+    LambdaFunction:
+        Type: "AWS::Lambda::Function"
+        Properties:
+            Description: ""
+            FunctionName: "enrich-lambda"
+            Handler: "lambda_function.lambda_handler"
+            Architectures: 
+              - "x86_64"
+            Code: 
+                S3Bucket: "awslambda-eu-n-1-tasks"
+                S3Key: !Sub "/snapshots/${AWS::AccountId}/enrich-lambda-61f92493-b73a-4325-b5ed-3f36e0def716"
+                S3ObjectVersion: "d5RsyWsL3ljbrSd7_AjenuwxtU0O8D5g"
+            MemorySize: 128
+            Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/service-role/enrich-lambda-role-rus1h72o"
+            Runtime: "python3.13"
+            Timeout: 900
+            TracingConfig: 
+                Mode: "PassThrough"
+            EphemeralStorage: 
+                Size: 512
+
+    LambdaFunction2:
+        Type: "AWS::Lambda::Function"
+        Properties:
+            Description: ""
+            FunctionName: "reddit-crawler"
+            Handler: "lambda_function.lambda_handler"
+            Architectures: 
+              - "x86_64"
+            Code: 
+                S3Bucket: "awslambda-eu-n-1-tasks"
+                S3Key: !Sub "/snapshots/${AWS::AccountId}/reddit-crawler-2dfcc808-bc1e-48dd-8639-06e078018800"
+                S3ObjectVersion: "l3bea4YHW2xVQXAqVpS7tEkK1WQ1WZWB"
+            MemorySize: 128
+            Role: !GetAtt IAMRole18.Arn
+            Runtime: "python3.12"
+            Timeout: 900
+            TracingConfig: 
+                Mode: "PassThrough"
+            EphemeralStorage: 
+                Size: 512
+
+    LambdaPermission:
+        Type: "AWS::Lambda::Permission"
+        Properties:
+            Action: "lambda:InvokeFunction"
+            FunctionName: !GetAtt LambdaFunction.Arn
+            Principal: "s3.amazonaws.com"
+            SourceArn: !Sub "arn:aws:s3:::${LambdaFunction2}-bucket"
+
+    S3Bucket:
+        Type: "AWS::S3::Bucket"
+        Properties:
+            BucketName: !Sub "${LambdaFunction2}-bucket"
+            BucketEncryption: 
+                ServerSideEncryptionConfiguration: 
+                  - 
+                    ServerSideEncryptionByDefault: 
+                        SSEAlgorithm: "AES256"
+                    BucketKeyEnabled: true
+            NotificationConfiguration: 
+                LambdaConfigurations: 
+                  - 
+                    Event: "s3:ObjectCreated:*"
+                    Filter: 
+                        S3Key: 
+                            Rules: 
+                              - 
+                                Name: "Prefix"
+                                Value: "tweets/"
+                              - 
+                                Name: "Suffix"
+                                Value: ".json"
+                    Function: !GetAtt LambdaFunction.Arn
+            OwnershipControls: 
+                Rules: 
+                  - 
+                    ObjectOwnership: "BucketOwnerEnforced"
+            PublicAccessBlockConfiguration: 
+                BlockPublicAcls: true
+                BlockPublicPolicy: true
+                IgnorePublicAcls: true
+                RestrictPublicBuckets: true
+
+    S3Bucket2:
+        Type: "AWS::S3::Bucket"
+        Properties:
+            BucketName: !Sub "sagemaker-${AWS::Region}-${AWS::AccountId}"
+            BucketEncryption: 
+                ServerSideEncryptionConfiguration: 
+                  - 
+                    ServerSideEncryptionByDefault: 
+                        SSEAlgorithm: "AES256"
+                    BucketKeyEnabled: false
+            CorsConfiguration: 
+                CorsRules: 
+                  - 
+                    AllowedHeaders: 
+                      - "*"
+                    AllowedMethods: 
+                      - "POST"
+                      - "PUT"
+                      - "GET"
+                      - "HEAD"
+                      - "DELETE"
+                    AllowedOrigins: 
+                      - "https://*.sagemaker.aws"
+            OwnershipControls: 
+                Rules: 
+                  - 
+                    ObjectOwnership: "BucketOwnerEnforced"
+            PublicAccessBlockConfiguration: 
+                BlockPublicAcls: true
+                BlockPublicPolicy: true
+                IgnorePublicAcls: true
+                RestrictPublicBuckets: true
+
+    S3Bucket3:
+        Type: "AWS::S3::Bucket"
+        Properties:
+            BucketName: !Sub "aws-athena-query-results-${AWS::Region}-${AWS::AccountId}"
+            BucketEncryption: 
+                ServerSideEncryptionConfiguration: 
+                  - 
+                    ServerSideEncryptionByDefault: 
+                        SSEAlgorithm: "AES256"
+                    BucketKeyEnabled: false
+            OwnershipControls: 
+                Rules: 
+                  - 
+                    ObjectOwnership: "BucketOwnerEnforced"
+            PublicAccessBlockConfiguration: 
+                BlockPublicAcls: true
+                BlockPublicPolicy: true
+                IgnorePublicAcls: true
+                RestrictPublicBuckets: true
+
+    S3Bucket4:
+        Type: "AWS::S3::Bucket"
+        Properties:
+            BucketName: !Sub "sagemaker-studio-${AWS::AccountId}-0coek8yq636p"
+            BucketEncryption: 
+                ServerSideEncryptionConfiguration: 
+                  - 
+                    ServerSideEncryptionByDefault: 
+                        SSEAlgorithm: "AES256"
+                    BucketKeyEnabled: false
+            OwnershipControls: 
+                Rules: 
+                  - 
+                    ObjectOwnership: "BucketOwnerEnforced"
+            PublicAccessBlockConfiguration: 
+                BlockPublicAcls: true
+                BlockPublicPolicy: true
+                IgnorePublicAcls: true
+                RestrictPublicBuckets: true
+
+    S3Bucket5:
+        Type: "AWS::S3::Bucket"
+        Properties:
+            BucketName: "x-enriched-bucket"
+            BucketEncryption: 
+                ServerSideEncryptionConfiguration: 
+                  - 
+                    ServerSideEncryptionByDefault: 
+                        SSEAlgorithm: "AES256"
+                    BucketKeyEnabled: true
+            OwnershipControls: 
+                Rules: 
+                  - 
+                    ObjectOwnership: "BucketOwnerEnforced"
+            PublicAccessBlockConfiguration: 
+                BlockPublicAcls: true
+                BlockPublicPolicy: true
+                IgnorePublicAcls: true
+                RestrictPublicBuckets: true
+
+    S3BucketPolicy:
+        Type: "AWS::S3::BucketPolicy"
+        Properties:
+            Bucket: !Ref S3Bucket2
+            PolicyDocument: 
+                Version: "2008-10-17"
+                Id: "Enforce HTTPS"
+                Statement: 
+                  - 
+                    Effect: "Deny"
+                    Principal: "*"
+                    Action: "s3:*"
+                    Resource: !Sub "arn:aws:s3:::${S3Bucket2}"
+                    Condition: 
+                        Bool: 
+                            "aws:SecureTransport": "false"
+
+    S3BucketPolicy2:
+        Type: "AWS::S3::BucketPolicy"
+        Properties:
+            Bucket: !Ref S3Bucket4
+            PolicyDocument: 
+                Version: "2008-10-17"
+                Id: "Enforce HTTPS"
+                Statement: 
+                  - 
+                    Effect: "Deny"
+                    Principal: "*"
+                    Action: "s3:*"
+                    Resource: !Sub "arn:aws:s3:::${S3Bucket4}"
+                    Condition: 
+                        Bool: 
+                            "aws:SecureTransport": "false"
+
+    ElastiCacheUser:
+        Type: "AWS::ElastiCache::User"
+        Properties:
+            UserId: "default"
+            UserName: "default"
+            Engine: "redis"
+            AccessString: "on ~* +@all"
+            NoPasswordRequired: true
+
+    LogsLogGroup:
+        Type: "AWS::Logs::LogGroup"
+        Properties:
+            LogGroupName: "/aws-glue/crawlers"
+
+    LogsLogGroup2:
+        Type: "AWS::Logs::LogGroup"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+
+    LogsLogGroup3:
+        Type: "AWS::Logs::LogGroup"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+
+    LogsLogGroup4:
+        Type: "AWS::Logs::LogGroup"
+        Properties:
+            LogGroupName: "/aws/sagemaker/Endpoints/huggingface-pytorch-inference-2025-08-31-17-07-23-266"
+
+    LogsLogGroup5:
+        Type: "AWS::Logs::LogGroup"
+        Properties:
+            LogGroupName: "/aws/sagemaker/Endpoints/huggingface-pytorch-inference-2025-08-31-17-12-06-942"
+
+    LogsLogGroup6:
+        Type: "AWS::Logs::LogGroup"
+        Properties:
+            LogGroupName: "/aws/sagemaker/Endpoints/huggingface-pytorch-inference-2025-08-31-17-46-16-561"
+
+    LogsLogGroup7:
+        Type: "AWS::Logs::LogGroup"
+        Properties:
+            LogGroupName: "/aws/sagemaker/NotebookInstances"
+
+    LogsLogStream:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: "/aws-glue/crawlers"
+            LogStreamName: "enriched-crawler"
+
+    LogsLogStream2:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]018c46bf3e774d6c9008f0d2578660e8"
+
+    LogsLogStream3:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]04d130d31a7340298e430fd6bdfff03b"
+
+    LogsLogStream4:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]0a4c41f37b5f4d93a830cc00f51fdd95"
+
+    LogsLogStream5:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]0a6f3a4ef2084a00a7ae1582a8b5670e"
+
+    LogsLogStream6:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]0d88d6b105b64e9084ed1ccd450d0b67"
+
+    LogsLogStream7:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]10336dd3463f405ba0703cabd406cda7"
+
+    LogsLogStream8:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]12c7b3e28c874b8eb8b71905e9cbf636"
+
+    LogsLogStream9:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]22bb0d949d024d9494debe4c76c35212"
+
+    LogsLogStream10:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]81800848d7e24e0d90c7c285c6d7c9e0"
+
+    LogsLogStream11:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]81a3d5127906431f9abe632765f6df16"
+
+    LogsLogStream12:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]81b02b3d3763437a9b4c9e5274eb35df"
+
+    LogsLogStream13:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]98800c102c0f41f59c8c68bfe18b0974"
+
+    LogsLogStream14:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]af31ab6adba14b9b9511fb90791efeed"
+
+    LogsLogStream15:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]df7d650cfd1a47bf991c70c5d5cb2c79"
+
+    LogsLogStream16:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/08/31/[$LATEST]f5477817ff3c44ba90bff1ac5fb891f8"
+
+    LogsLogStream17:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]12dd519257db45b6822b40de75b1062f"
+
+    LogsLogStream18:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]1dc77bfa51ce47ae9db2dfdfd1cda8dd"
+
+    LogsLogStream19:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]2fabc3f663d74d5aad3d7721f8c091a4"
+
+    LogsLogStream20:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]2fbd58d91b7d43bf83171040e5c91214"
+
+    LogsLogStream21:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]50e5668046ee4b99ba29a3bd02b17a8b"
+
+    LogsLogStream22:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]562a022e4a2145f098105d420939879f"
+
+    LogsLogStream23:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]69d50599968c4546ad164783a4fa824a"
+
+    LogsLogStream24:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]9f2173b8e8d94fedb82eafb88a7e0200"
+
+    LogsLogStream25:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]a2900765127c4167a1ae56a7fcee7211"
+
+    LogsLogStream26:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]a578c23559e24156911c2d374fb28923"
+
+    LogsLogStream27:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]a9029f54b4e04419ac14a588d396b682"
+
+    LogsLogStream28:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]b4b4ed8bdf2c4eb692a960816a88378e"
+
+    LogsLogStream29:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]dcccc9528fd34479a293180fb44bcd79"
+
+    LogsLogStream30:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction}"
+            LogStreamName: "2025/09/01/[$LATEST]ec3266d5b57d4cbcb12877144c85491d"
+
+    LogsLogStream31:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: "/aws/sagemaker/Endpoints/huggingface-pytorch-inference-2025-08-31-17-07-23-266"
+            LogStreamName: "AllTraffic/i-07a60d3aeeb30e0b9"
+
+    LogsLogStream32:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/17/[$LATEST]748b42b397214bcdbd59f43a0a2c880f"
+
+    LogsLogStream33:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/17/[$LATEST]75f408a9b8624b7eaea951a17fe158cb"
+
+    LogsLogStream34:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/17/[$LATEST]e99ad2fc0cc04c4d861239834888c008"
+
+    LogsLogStream35:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]0d371cb2b49447bc978ec92b0e58393b"
+
+    LogsLogStream36:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]2ff923bc05124c3c9ed4a87e2ed722af"
+
+    LogsLogStream37:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]44eab85b7be74aaa99736b76772c9a36"
+
+    LogsLogStream38:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]53847ec49ff04353aff72e8229c13df6"
+
+    LogsLogStream39:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]696807f9283b41ac8d8b9ae164e7a902"
+
+    LogsLogStream40:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]719e61a9f938433b92d5ff784c2ce1f8"
+
+    LogsLogStream41:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]7323523e73794c9abbde3bd94eb6e5a0"
+
+    LogsLogStream42:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]87667c53f0fe42a4b28919909456bb64"
+
+    LogsLogStream43:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]8f83c49c07df41e3bde872bb20f7d1c2"
+
+    LogsLogStream44:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]95f696fbf24b47e1baa76e2fdbf897a4"
+
+    LogsLogStream45:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]969f5edf95e9414b8df1e5fdf2ff5924"
+
+    LogsLogStream46:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]c5dc80511ead4c739d454d947e2f30b8"
+
+    LogsLogStream47:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/18/[$LATEST]e9befa37779b4064813d4313b2d86f83"
+
+    LogsLogStream48:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/20/[$LATEST]561578ae036a48eb976b3ed1a57cdd91"
+
+    LogsLogStream49:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/20/[$LATEST]7b5284558f0b44bc8d9495f8c1dbd51f"
+
+    LogsLogStream50:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/22/[$LATEST]fd883470f5524003bdb5af76d6c2cc42"
+
+    LogsLogStream51:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/23/[$LATEST]7a7680e426dc4d54bbb6e35f9c6914c4"
+
+    LogsLogStream52:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/24/[$LATEST]4196f2f586174c91bdc6b03750ca10ac"
+
+    LogsLogStream53:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/25/[$LATEST]222f9ab94fd9431eba806518d2426bc3"
+
+    LogsLogStream54:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/25/[$LATEST]25c4ee193c6244acaebe80dabc9e24f4"
+
+    LogsLogStream55:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/27/[$LATEST]561c8f90a8db46d9b7c2a24aba7cdaeb"
+
+    LogsLogStream56:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/28/[$LATEST]4ec3f0740dee47a2925986983e7f381d"
+
+    LogsLogStream57:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/29/[$LATEST]1c848c3f17df4dbda9a4a954e2e82e08"
+
+    LogsLogStream58:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/30/[$LATEST]0df3c344c988475ea0f47b3e66935650"
+
+    LogsLogStream59:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/08/31/[$LATEST]91dc99079f994a12a967c76436aeca3a"
+
+    LogsLogStream60:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: !Sub "/aws/lambda/${LambdaFunction2}"
+            LogStreamName: "2025/09/01/[$LATEST]23a4e89fb43c4e7eb764a848aa8a7ba8"
+
+    LogsLogStream61:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: "/aws/sagemaker/Endpoints/huggingface-pytorch-inference-2025-08-31-17-12-06-942"
+            LogStreamName: "AllTraffic/i-02d3d97bd7f5b634e"
+
+    LogsLogStream62:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: "/aws/sagemaker/NotebookInstances"
+            LogStreamName: "sentiment-notebook/jupyter.log"
+
+    LogsLogStream63:
+        Type: "AWS::Logs::LogStream"
+        Properties:
+            LogGroupName: "/aws/sagemaker/Endpoints/huggingface-pytorch-inference-2025-08-31-17-46-16-561"
+            LogStreamName: "AllTraffic/i-0afaeb0d37971b1c7"
+
+    EFSFileSystem:
+        Type: "AWS::EFS::FileSystem"
+        Properties:
+            PerformanceMode: "generalPurpose"
+            Encrypted: true
+            KmsKeyId: !Sub "arn:aws:kms:${AWS::Region}:${AWS::AccountId}:key/584eba7a-7c40-4c54-a223-db3f037923e1"
+            ThroughputMode: "bursting"
+            FileSystemTags: 
+              - 
+                Key: "ManagedByAmazonSageMakerResource"
+                Value: !GetAtt SageMakerDomain.DomainArn
+
+    EFSMountTarget:
+        Type: "AWS::EFS::MountTarget"
+        Properties:
+            FileSystemId: !Ref EFSFileSystem
+            IpAddress: "172.31.6.160"
+            SecurityGroups: 
+              - !Ref EC2SecurityGroup
+            SubnetId: "subnet-03e6a4e55fb4f091e"
+
+    EFSMountTarget2:
+        Type: "AWS::EFS::MountTarget"
+        Properties:
+            FileSystemId: !Ref EFSFileSystem
+            IpAddress: "172.31.24.214"
+            SecurityGroups: 
+              - !Ref EC2SecurityGroup
+            SubnetId: "subnet-00fdd0e9d2e9ce6bb"
+
+    EFSMountTarget3:
+        Type: "AWS::EFS::MountTarget"
+        Properties:
+            FileSystemId: !Ref EFSFileSystem
+            IpAddress: "172.31.36.154"
+            SecurityGroups: 
+              - !Ref EC2SecurityGroup
+            SubnetId: "subnet-0c3c2ea508e17dd26"
+
+    EFSAccessPoint:
+        Type: "AWS::EFS::AccessPoint"
+        Properties:
+            FileSystemId: !Ref EFSFileSystem
+            ClientToken: !Sub "200005:${SageMakerDomain}:${SageMakerUserProfile}"
+            AccessPointTags: 
+              - 
+                Key: "ManagedByAmazonSageMakerResource"
+                Value: !Sub "arn:aws:sagemaker:${AWS::Region}:${AWS::AccountId}:user-profile/${SageMakerDomain}/${SageMakerUserProfile}"
+            PosixUser: 
+                Uid: 200005
+                Gid: 0
+            RootDirectory: 
+                Path: "/200005"
+                CreationInfo: 
+                    OwnerUid: 200005
+                    OwnerGid: 0
+                    Permissions: "700"
+
+    SageMakerModel:
+        Type: "AWS::SageMaker::Model"
+        Properties:
+            ModelName: "huggingface-pytorch-inference-2025-08-31-17-46-16-157"
+            PrimaryContainer: 
+                Environment: 
+                    HF_MODEL_ID: "cardiffnlp/twitter-roberta-base-sentiment-latest"
+                    HF_TASK: "text-classification"
+                    SAGEMAKER_CONTAINER_LOG_LEVEL: "20"
+                    SAGEMAKER_REGION: !Ref AWS::Region
+                Image: !Sub "763104351884.dkr.ecr.${AWS::Region}.amazonaws.com/huggingface-pytorch-inference:2.6.0-transformers4.49.0-cpu-py312-ubuntu22.04"
+            ExecutionRoleArn: !GetAtt IAMRole13.Arn
+
+    SageMakerModel2:
+        Type: "AWS::SageMaker::Model"
+        Properties:
+            ModelName: "huggingface-pytorch-inference-2025-08-31-17-45-39-756"
+            PrimaryContainer: 
+                Environment: 
+                    HF_MODEL_ID: "cardiffnlp/twitter-roberta-base-sentiment-latest"
+                    HF_TASK: "text-classification"
+                    SAGEMAKER_CONTAINER_LOG_LEVEL: "20"
+                    SAGEMAKER_REGION: !Ref AWS::Region
+                Image: !Sub "763104351884.dkr.ecr.${AWS::Region}.amazonaws.com/huggingface-pytorch-inference:2.6.0-transformers4.49.0-cpu-py312-ubuntu22.04"
+            ExecutionRoleArn: !GetAtt IAMRole13.Arn
+
+    SageMakerModel3:
+        Type: "AWS::SageMaker::Model"
+        Properties:
+            ModelName: "huggingface-pytorch-inference-2025-08-31-17-33-30-782"
+            PrimaryContainer: 
+                Environment: 
+                    HF_MODEL_ID: "cardiffnlp/twitter-roberta-base-sentiment-latest"
+                    HF_TASK: "text-classification"
+                    SAGEMAKER_CONTAINER_LOG_LEVEL: "20"
+                    SAGEMAKER_REGION: !Ref AWS::Region
+                Image: !Sub "763104351884.dkr.ecr.${AWS::Region}.amazonaws.com/huggingface-pytorch-inference:2.6.0-transformers4.49.0-cpu-py312-ubuntu22.04"
+            ExecutionRoleArn: !GetAtt IAMRole13.Arn
+
+    SageMakerModel4:
+        Type: "AWS::SageMaker::Model"
+        Properties:
+            ModelName: "huggingface-pytorch-inference-2025-08-31-17-25-26-694"
+            PrimaryContainer: 
+                Environment: 
+                    HF_MODEL_ID: "cardiffnlp/twitter-roberta-base-sentiment-latest"
+                    HF_TASK: "text-classification"
+                    SAGEMAKER_CONTAINER_LOG_LEVEL: "20"
+                    SAGEMAKER_REGION: !Ref AWS::Region
+                Image: !Sub "763104351884.dkr.ecr.${AWS::Region}.amazonaws.com/huggingface-pytorch-inference:2.6.0-transformers4.49.0-cpu-py312-ubuntu22.04"
+            ExecutionRoleArn: !GetAtt IAMRole13.Arn
+
+    SageMakerEndpoint:
+        Type: "AWS::SageMaker::Endpoint"
+        Properties:
+            EndpointName: "huggingface-pytorch-inference-2025-08-31-17-46-16-561"
+            EndpointConfigName: "huggingface-pytorch-inference-2025-08-31-17-46-16-561"
+
+    SageMakerEndpointConfig:
+        Type: "AWS::SageMaker::EndpointConfig"
+        Properties:
+            EndpointConfigName: "huggingface-pytorch-inference-2025-08-31-17-46-16-561"
+            ProductionVariants: 
+              - 
+                VariantName: "AllTraffic"
+                ModelName: "huggingface-pytorch-inference-2025-08-31-17-46-16-157"
+                InitialInstanceCount: 1
+                InstanceType: "ml.m5.xlarge"
+                InitialVariantWeight: 1
+
+    SageMakerEndpointConfig2:
+        Type: "AWS::SageMaker::EndpointConfig"
+        Properties:
+            EndpointConfigName: "huggingface-pytorch-inference-2025-08-31-17-33-31-235"
+            ProductionVariants: 
+              - 
+                VariantName: "AllTraffic"
+                ModelName: "huggingface-pytorch-inference-2025-08-31-17-33-30-782"
+                InitialInstanceCount: 1
+                InstanceType: "ml.m5.xlarge"
+                InitialVariantWeight: 1
+
+    SageMakerEndpointConfig3:
+        Type: "AWS::SageMaker::EndpointConfig"
+        Properties:
+            EndpointConfigName: "sentiment-endpoint"
+            ProductionVariants: 
+              - 
+                VariantName: "AllTraffic"
+                ModelName: "huggingface-pytorch-inference-2025-08-31-17-25-26-694"
+                InitialInstanceCount: 1
+                InstanceType: "ml.m5.xlarge"
+                InitialVariantWeight: 1
+
+    SageMakerEndpointConfig4:
+        Type: "AWS::SageMaker::EndpointConfig"
+        Properties:
+            EndpointConfigName: "huggingface-pytorch-inference-2025-08-31-17-12-06-942"
+            ProductionVariants: 
+              - 
+                VariantName: "AllTraffic"
+                ModelName: "huggingface-pytorch-inference-2025-08-31-17-12-06-557"
+                InitialInstanceCount: 1
+                InstanceType: "ml.m5.xlarge"
+                InitialVariantWeight: 1
+
+    SageMakerEndpointConfig5:
+        Type: "AWS::SageMaker::EndpointConfig"
+        Properties:
+            EndpointConfigName: "huggingface-pytorch-inference-2025-08-31-17-07-23-266"
+            ProductionVariants: 
+              - 
+                VariantName: "AllTraffic"
+                ModelName: "huggingface-pytorch-inference-2025-08-31-17-07-22-835"
+                InitialInstanceCount: 1
+                InstanceType: "ml.m5.xlarge"
+                InitialVariantWeight: 1
+
+    SageMakerNotebookInstance:
+        Type: "AWS::SageMaker::NotebookInstance"
+        Properties:
+            NotebookInstanceName: "sentiment-notebook"
+            InstanceType: "ml.t3.medium"
+            RoleArn: !GetAtt IAMRole13.Arn
+            DirectInternetAccess: "Enabled"
+            VolumeSizeInGB: 5
+            RootAccess: "Enabled"
+
+    SageMakerDomain:
+        Type: "AWS::SageMaker::Domain"
+        Properties:
+            DomainName: "QuickSetupDomain-20250831T192985"
+            AuthMode: "IAM"
+            VpcId: "vpc-0efd686be15069435"
+            AppNetworkAccessType: "PublicInternetOnly"
+            SubnetIds: 
+              - "subnet-03e6a4e55fb4f091e"
+              - "subnet-00fdd0e9d2e9ce6bb"
+              - "subnet-0c3c2ea508e17dd26"
+            DefaultUserSettings: 
+                ExecutionRole: !GetAtt IAMRole2.Arn
+                SharingSettings: 
+                    NotebookOutputOption: "Allowed"
+                    S3OutputPath: !Sub "s3://${S3Bucket4}/sharing"
+                JupyterServerAppSettings: 
+                    DefaultResourceSpec: 
+                        SageMakerImageArn: !Sub "arn:aws:sagemaker:${AWS::Region}:243637512696:image/jupyter-server-3"
+                        InstanceType: "system"
+                CanvasAppSettings: {}
+                DefaultLandingUri: "studio::"
+                StudioWebPortal: "ENABLED"
+
+    SageMakerUserProfile:
+        Type: "AWS::SageMaker::UserProfile"
+        Properties:
+            UserProfileName: "default-20250831T192985"
+            DomainId: !Ref SageMakerDomain
+            UserSettings: 
+                ExecutionRole: !GetAtt IAMRole2.Arn
+
+    GlueDatabase:
+        Type: "AWS::Glue::Database"
+        Properties:
+            DatabaseInput: 
+                Name: "default"
+            CatalogId: !Ref "AWS::AccountId"
+
+    GlueDatabase2:
+        Type: "AWS::Glue::Database"
+        Properties:
+            DatabaseInput: 
+                Name: "stock-market-db"
+            CatalogId: !Ref "AWS::AccountId"
+
+    GlueTable:
+        Type: "AWS::Glue::Table"
+        Properties:
+            DatabaseName: "stock-market-db"
+            CatalogId: !Ref "AWS::AccountId"
+            TableInput: 
+                Owner: "hadoop"
+                TableType: "EXTERNAL_TABLE"
+                Parameters: 
+                    EXTERNAL: "TRUE"
+                    transient_lastDdlTime: "1756716128"
+                StorageDescriptor: 
+                    Columns: 
+                      - 
+                        Name: "json"
+                        Type: "string"
+                    Location: !Sub "s3://${S3Bucket5}/"
+                    InputFormat: "org.apache.hadoop.mapred.TextInputFormat"
+                    OutputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+                    Compressed: false
+                    NumberOfBuckets: -1
+                    SerdeInfo: 
+                        SerializationLibrary: "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe"
+                        Parameters: 
+                            "serialization.format": "1"
+                    Parameters: {}
+                    SkewedInfo: 
+                        SkewedColumnValueLocationMaps: {}
+                    StoredAsSubDirectories: false
+                Retention: 0
+                Name: "raw_tweets"
+
+    GlueTable2:
+        Type: "AWS::Glue::Table"
+        Properties:
+            DatabaseName: "stock-market-db"
+            CatalogId: !Ref "AWS::AccountId"
+            TableInput: 
+                ViewOriginalText: "/* Presto View: eyJvcmlnaW5hbFNxbCI6IldJVEhcbiAgcmFua2VkIEFTIChcbiAgIFNFTEVDVFxuICAgICB0aWNrZXJcbiAgICwgdXNlcm5hbWVcbiAgICwgU1VNKCgobGlrZXMgKyByZXR3ZWV0cykgKyByZXBsaWVzKSkgZW5nYWdlbWVudFxuICAgLCBSQU5LKCkgT1ZFUiAoUEFSVElUSU9OIEJZIHRpY2tlciBPUkRFUiBCWSBTVU0oKChsaWtlcyArIHJldHdlZXRzKSArIHJlcGxpZXMpKSBERVNDKSB1c2VyX3JhbmtcbiAgIEZST01cbiAgICAgdHdlZXRzXG4gICBHUk9VUCBCWSB0aWNrZXIsIHVzZXJuYW1lXG4pIFxuU0VMRUNUICpcbkZST01cbiAgcmFua2VkXG5XSEVSRSAodXNlcl9yYW5rID0gMSlcbk9SREVSIEJZIGVuZ2FnZW1lbnQgREVTQ1xuIiwiY2F0YWxvZyI6ImF3c2RhdGFjYXRhbG9nIiwic2NoZW1hIjoic3RvY2stbWFya2V0LWRiIiwiY29sdW1ucyI6W3sibmFtZSI6InRpY2tlciIsInR5cGUiOiJ2YXJjaGFyIn0seyJuYW1lIjoidXNlcm5hbWUiLCJ0eXBlIjoidmFyY2hhciJ9LHsibmFtZSI6ImVuZ2FnZW1lbnQiLCJ0eXBlIjoiYmlnaW50In0seyJuYW1lIjoidXNlcl9yYW5rIiwidHlwZSI6ImJpZ2ludCJ9XSwib3duZXIiOiI2NDE1MzI4MDkzMzIiLCJydW5Bc0ludm9rZXIiOmZhbHNlLCJwcm9wZXJ0aWVzIjp7fSwiaXNQcm90ZWN0ZWQiOmZhbHNlLCJpc011bHRpRGlhbGVjdCI6ZmFsc2V9 */"
+                TableType: "VIRTUAL_VIEW"
+                Parameters: 
+                    presto_view: "true"
+                    comment: "Presto View"
+                ViewExpandedText: "/* Presto View */"
+                StorageDescriptor: 
+                    Columns: 
+                      - 
+                        Name: "ticker"
+                        Type: "string"
+                      - 
+                        Name: "username"
+                        Type: "string"
+                      - 
+                        Name: "engagement"
+                        Type: "bigint"
+                      - 
+                        Name: "user_rank"
+                        Type: "bigint"
+                    Location: ""
+                    Compressed: false
+                    NumberOfBuckets: 0
+                    SerdeInfo: {}
+                    StoredAsSubDirectories: false
+                Retention: 0
+                Name: "top_users_per_ticker"
+
+    GlueTable3:
+        Type: "AWS::Glue::Table"
+        Properties:
+            DatabaseName: "stock-market-db"
+            CatalogId: !Ref "AWS::AccountId"
+            TableInput: 
+                ViewOriginalText: "/* Presto View: eyJvcmlnaW5hbFNxbCI6IlNFTEVDVFxuICBDQVNUKGpzb25fZXh0cmFjdF9zY2FsYXIoZWxlbWVudCwgJyQuaWQnKSBBUyBiaWdpbnQpIGlkXG4sIGpzb25fZXh0cmFjdF9zY2FsYXIoZWxlbWVudCwgJyQudGlja2VyJykgdGlja2VyXG4sIGpzb25fZXh0cmFjdF9zY2FsYXIoZWxlbWVudCwgJyQudXNlcm5hbWUnKSB1c2VybmFtZVxuLCBqc29uX2V4dHJhY3Rfc2NhbGFyKGVsZW1lbnQsICckLmRpc3BsYXlfbmFtZScpIGRpc3BsYXlfbmFtZVxuLCBqc29uX2V4dHJhY3Rfc2NhbGFyKGVsZW1lbnQsICckLmNvbnRlbnQnKSBjb250ZW50XG4sIENBU1QoanNvbl9leHRyYWN0X3NjYWxhcihlbGVtZW50LCAnJC5jcmVhdGVkX2F0JykgQVMgdGltZXN0YW1wKSBjcmVhdGVkX2F0XG4sIENBU1QoanNvbl9leHRyYWN0X3NjYWxhcihlbGVtZW50LCAnJC5saWtlcycpIEFTIGludCkgbGlrZXNcbiwgQ0FTVChqc29uX2V4dHJhY3Rfc2NhbGFyKGVsZW1lbnQsICckLnJldHdlZXRzJykgQVMgaW50KSByZXR3ZWV0c1xuLCBDQVNUKGpzb25fZXh0cmFjdF9zY2FsYXIoZWxlbWVudCwgJyQucmVwbGllcycpIEFTIGludCkgcmVwbGllc1xuLCBDQVNUKGpzb25fZXh0cmFjdChlbGVtZW50LCAnJC5oYXNodGFncycpIEFTIGFycmF5KHZhcmNoYXIpKSBoYXNodGFnc1xuLCBqc29uX2V4dHJhY3Rfc2NhbGFyKGVsZW1lbnQsICckLnVybCcpIHVybFxuLCBqc29uX2V4dHJhY3Rfc2NhbGFyKGVsZW1lbnQsICckLnNlbnRpbWVudCcpIHNlbnRpbWVudFxuLCBDQVNUKGpzb25fZXh0cmFjdF9zY2FsYXIoZWxlbWVudCwgJyQuc2VudGltZW50X3Njb3JlJykgQVMgZG91YmxlKSBzZW50aW1lbnRfc2NvcmVcbkZST01cbiAgKHJhd190d2VldHNcbkNST1NTIEpPSU4gVU5ORVNUKENBU1QoanNvbl9wYXJzZShqc29uKSBBUyBhcnJheShqc29uKSkpIHQgKGVsZW1lbnQpKVxuIiwiY2F0YWxvZyI6ImF3c2RhdGFjYXRhbG9nIiwic2NoZW1hIjoic3RvY2stbWFya2V0LWRiIiwiY29sdW1ucyI6W3sibmFtZSI6ImlkIiwidHlwZSI6ImJpZ2ludCJ9LHsibmFtZSI6InRpY2tlciIsInR5cGUiOiJ2YXJjaGFyIn0seyJuYW1lIjoidXNlcm5hbWUiLCJ0eXBlIjoidmFyY2hhciJ9LHsibmFtZSI6ImRpc3BsYXlfbmFtZSIsInR5cGUiOiJ2YXJjaGFyIn0seyJuYW1lIjoiY29udGVudCIsInR5cGUiOiJ2YXJjaGFyIn0seyJuYW1lIjoiY3JlYXRlZF9hdCIsInR5cGUiOiJ0aW1lc3RhbXAoMykifSx7Im5hbWUiOiJsaWtlcyIsInR5cGUiOiJpbnRlZ2VyIn0seyJuYW1lIjoicmV0d2VldHMiLCJ0eXBlIjoiaW50ZWdlciJ9LHsibmFtZSI6InJlcGxpZXMiLCJ0eXBlIjoiaW50ZWdlciJ9LHsibmFtZSI6Imhhc2h0YWdzIiwidHlwZSI6ImFycmF5KHZhcmNoYXIpIn0seyJuYW1lIjoidXJsIiwidHlwZSI6InZhcmNoYXIifSx7Im5hbWUiOiJzZW50aW1lbnQiLCJ0eXBlIjoidmFyY2hhciJ9LHsibmFtZSI6InNlbnRpbWVudF9zY29yZSIsInR5cGUiOiJkb3VibGUifV0sIm93bmVyIjoiNjQxNTMyODA5MzMyIiwicnVuQXNJbnZva2VyIjpmYWxzZSwicHJvcGVydGllcyI6e30sImlzUHJvdGVjdGVkIjpmYWxzZSwiaXNNdWx0aURpYWxlY3QiOmZhbHNlfQ== */"
+                TableType: "VIRTUAL_VIEW"
+                Parameters: 
+                    presto_view: "true"
+                    comment: "Presto View"
+                ViewExpandedText: "/* Presto View */"
+                StorageDescriptor: 
+                    Columns: 
+                      - 
+                        Name: "id"
+                        Type: "bigint"
+                      - 
+                        Name: "ticker"
+                        Type: "string"
+                      - 
+                        Name: "username"
+                        Type: "string"
+                      - 
+                        Name: "display_name"
+                        Type: "string"
+                      - 
+                        Name: "content"
+                        Type: "string"
+                      - 
+                        Name: "created_at"
+                        Type: "timestamp"
+                      - 
+                        Name: "likes"
+                        Type: "int"
+                      - 
+                        Name: "retweets"
+                        Type: "int"
+                      - 
+                        Name: "replies"
+                        Type: "int"
+                      - 
+                        Name: "hashtags"
+                        Type: "array<string>"
+                      - 
+                        Name: "url"
+                        Type: "string"
+                      - 
+                        Name: "sentiment"
+                        Type: "string"
+                      - 
+                        Name: "sentiment_score"
+                        Type: "double"
+                    Location: ""
+                    Compressed: false
+                    NumberOfBuckets: 0
+                    SerdeInfo: {}
+                    StoredAsSubDirectories: false
+                Retention: 0
+                Name: "tweets"
+
+    GlueTable4:
+        Type: "AWS::Glue::Table"
+        Properties:
+            DatabaseName: "stock-market-db"
+            CatalogId: !Ref "AWS::AccountId"
+            TableInput: 
+                Owner: "owner"
+                TableType: "EXTERNAL_TABLE"
+                Parameters: 
+                    sizeKey: "16574949"
+                    objectCount: "411"
+                    UPDATED_BY_CRAWLER: "enriched-crawler"
+                    recordCount: "28355"
+                    CrawlerSchemaSerializerVersion: "1.0"
+                    CRAWL_RUN_ID: "805824a7-f352-49ed-b8d3-1428ab91926a"
+                    averageRecordSize: "510"
+                    jsonPath: "$[*]"
+                    compressionType: "none"
+                    CrawlerSchemaDeserializerVersion: "1.0"
+                    classification: "json"
+                    typeOfData: "file"
+                StorageDescriptor: 
+                    Columns: 
+                      - 
+                        Name: "id"
+                        Type: "bigint"
+                      - 
+                        Name: "ticker"
+                        Type: "string"
+                      - 
+                        Name: "username"
+                        Type: "string"
+                      - 
+                        Name: "display_name"
+                        Type: "string"
+                      - 
+                        Name: "content"
+                        Type: "string"
+                      - 
+                        Name: "created_at"
+                        Type: "string"
+                      - 
+                        Name: "likes"
+                        Type: "int"
+                      - 
+                        Name: "retweets"
+                        Type: "int"
+                      - 
+                        Name: "replies"
+                        Type: "int"
+                      - 
+                        Name: "hashtags"
+                        Type: "array<string>"
+                      - 
+                        Name: "url"
+                        Type: "string"
+                      - 
+                        Name: "sentiment"
+                        Type: "string"
+                      - 
+                        Name: "sentiment_score"
+                        Type: "double"
+                    Location: !Sub "s3://${S3Bucket5}/"
+                    InputFormat: "org.apache.hadoop.mapred.TextInputFormat"
+                    OutputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+                    Compressed: false
+                    NumberOfBuckets: -1
+                    SerdeInfo: 
+                        SerializationLibrary: "org.openx.data.jsonserde.JsonSerDe"
+                        Parameters: 
+                            paths: "content,created_at,display_name,hashtags,id,likes,replies,retweets,sentiment,sentiment_score,ticker,url,username"
+                    Parameters: 
+                        sizeKey: "16574949"
+                        objectCount: "411"
+                        UPDATED_BY_CRAWLER: "enriched-crawler"
+                        recordCount: "28355"
+                        CrawlerSchemaSerializerVersion: "1.0"
+                        CRAWL_RUN_ID: "805824a7-f352-49ed-b8d3-1428ab91926a"
+                        averageRecordSize: "510"
+                        jsonPath: "$[*]"
+                        compressionType: "none"
+                        CrawlerSchemaDeserializerVersion: "1.0"
+                        classification: "json"
+                        typeOfData: "file"
+                    StoredAsSubDirectories: false
+                Retention: 0
+                Name: "x_enriched_bucket"
+
+    CEAnomalyMonitor:
+        Type: "AWS::CE::AnomalyMonitor"
+        Properties:
+            MonitorName: "Default-Services-Monitor"
+            MonitorType: "DIMENSIONAL"
+            MonitorDimension: "SERVICE"
+
+    CEAnomalySubscription:
+        Type: "AWS::CE::AnomalySubscription"
+        Properties:
+            SubscriptionName: "Default-Services-Subscription"
+            Frequency: "DAILY"
+            MonitorArnList: 
+              - !Ref CEAnomalyMonitor
+            Subscribers: 
+              - 
+                Address: "mohmorsi124@gmail.com"
+                Type: "EMAIL"
+                Status: "CONFIRMED"
+
+    MemoryDBUser:
+        Type: "AWS::MemoryDB::User"
+        Properties:
+            UserName: "default"
+            AccessString: "on ~* &* +@all"
+            AuthenticationMode: "no-password"
+
+    MemoryDBACL:
+        Type: "AWS::MemoryDB::ACL"
+        Properties:
+            ACLName: "open-access"
+            UserNames: 
+              - "default"
+
+    MemoryDBParameterGroup:
+        Type: "AWS::MemoryDB::ParameterGroup"
+        Properties:
+            Description: "Default parameter group for memorydb_redis6"
+            Family: "memorydb_redis6"
+            Parameters: 
+              - 
+                Name: "acllog-max-len"
+                Value: "128"
+                Description: "The maximum length of the ACL Log"
+                DataType: "integer"
+                AllowedValues: "1-10000"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "activedefrag"
+                Value: "no"
+                Description: "Enabled active memory defragmentation"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "active-defrag-cycle-max"
+                Value: "75"
+                Description: "Maximal effort for defrag in CPU percentage"
+                DataType: "integer"
+                AllowedValues: "1-75"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "active-defrag-cycle-min"
+                Value: "5"
+                Description: "Minimal effort for defrag in CPU percentage"
+                DataType: "integer"
+                AllowedValues: "1-75"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "active-defrag-ignore-bytes"
+                Value: "104857600"
+                Description: "Minimum amount of fragmentation waste to start active defrag"
+                DataType: "integer"
+                AllowedValues: "1048576-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "active-defrag-max-scan-fields"
+                Value: "1000"
+                Description: "Maximum number of set/hash/zset/list fields that will be processed from the main dictionary scan"
+                DataType: "integer"
+                AllowedValues: "1-1000000"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "active-defrag-threshold-lower"
+                Value: "10"
+                Description: "Minimum percentage of fragmentation to start active defrag"
+                DataType: "integer"
+                AllowedValues: "1-100"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "active-defrag-threshold-upper"
+                Value: "100"
+                Description: "Maximum percentage of fragmentation at which we use maximum effort"
+                DataType: "integer"
+                AllowedValues: "1-100"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "active-expire-effort"
+                Value: "1"
+                Description: "The amount of effort that redis uses to expire items in the active expiration job"
+                DataType: "integer"
+                AllowedValues: "1-10"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "activerehashing"
+                Value: "yes"
+                Description: "Apply rehashing or not"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "client-output-buffer-limit-normal-hard-limit"
+                Value: "0"
+                Description: "Normal client output buffer hard limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "client-output-buffer-limit-normal-soft-limit"
+                Value: "0"
+                Description: "Normal client output buffer soft limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "client-output-buffer-limit-normal-soft-seconds"
+                Value: "0"
+                Description: "Normal client output buffer soft limit in seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "client-output-buffer-limit-pubsub-hard-limit"
+                Value: "33554432"
+                Description: "Pubsub client output buffer hard limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "client-output-buffer-limit-pubsub-soft-limit"
+                Value: "8388608"
+                Description: "Pubsub client output buffer soft limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "client-output-buffer-limit-pubsub-soft-seconds"
+                Value: "60"
+                Description: "Pubsub client output buffer soft limit in seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "hash-max-ziplist-entries"
+                Value: "512"
+                Description: "The maximum number of hash entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "hash-max-ziplist-value"
+                Value: "64"
+                Description: "The threshold of biggest hash entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "hll-sparse-max-bytes"
+                Value: "3000"
+                Description: "HyperLogLog sparse representation bytes limit"
+                DataType: "integer"
+                AllowedValues: "1-16000"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "lazyfree-lazy-eviction"
+                Value: "no"
+                Description: "Perform an asynchronous delete on evictions"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "lazyfree-lazy-expire"
+                Value: "no"
+                Description: "Perform an asynchronous delete on expired keys"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "lazyfree-lazy-server-del"
+                Value: "no"
+                Description: "Perform an asynchronous delete on key updates"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "lazyfree-lazy-user-del"
+                Value: "no"
+                Description: "Specifies whether the default behavior of DEL command acts the same as UNLINK"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "lfu-decay-time"
+                Value: "1"
+                Description: "The amount of time in minutes to decrement the key counter for LFU eviction policyd"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "lfu-log-factor"
+                Value: "10"
+                Description: "The log factor for incrementing key counter for LFU eviction policy"
+                DataType: "integer"
+                AllowedValues: "1-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "list-compress-depth"
+                Value: "0"
+                Description: "Number of quicklist ziplist nodes from each side of the list to exclude from compression. The head and tail of the list are always uncompressed for fast push/pop operations"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "maxmemory-policy"
+                Value: "noeviction"
+                Description: "Max memory policy"
+                DataType: "string"
+                AllowedValues: "volatile-lru,allkeys-lru,volatile-lfu,allkeys-lfu,volatile-random,allkeys-random,volatile-ttl,noeviction"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "maxmemory-samples"
+                Value: "3"
+                Description: "Max memory samples"
+                DataType: "integer"
+                AllowedValues: "1-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "notify-keyspace-events"
+                Description: "The keyspace events for Redis to notify Pub/Sub clients about. By default all notifications are disabled"
+                DataType: "string"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "set-max-intset-entries"
+                Value: "512"
+                Description: "The limit in the size of the set in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "slowlog-log-slower-than"
+                Value: "10000"
+                Description: "The execution time, in microseconds, to exceed in order for the command to get logged. Note that a negative number disables the slow log, while a value of zero forces the logging of every command"
+                DataType: "integer"
+                AllowedValues: "-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "slowlog-max-len"
+                Value: "128"
+                Description: "The length of the slow log. There is no limit to this length. Just be aware that it will consume memory. You can reclaim memory used by the slow log with SLOWLOG RESET."
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "stream-node-max-bytes"
+                Value: "4096"
+                Description: "The maximum size of a single node in a stream in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "stream-node-max-entries"
+                Value: "100"
+                Description: "The maximum number of items a single node in a stream can contain"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "tcp-keepalive"
+                Value: "300"
+                Description: "If non-zero, send ACKs every given number of seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "timeout"
+                Value: "0"
+                Description: "Close connection if client is idle for a given number of seconds, or never if 0"
+                DataType: "integer"
+                AllowedValues: "0,20-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "tracking-table-max-keys"
+                Value: "1000000"
+                Description: "The maximum number of keys allowed for the tracking table for client side caching"
+                DataType: "integer"
+                AllowedValues: "1-100000000"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "zset-max-ziplist-entries"
+                Value: "128"
+                Description: "The maximum number of sorted set entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+              - 
+                Name: "zset-max-ziplist-value"
+                Value: "64"
+                Description: "The threshold of biggest sorted set entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "6.2.4"
+
+    MemoryDBParameterGroup2:
+        Type: "AWS::MemoryDB::ParameterGroup"
+        Properties:
+            Description: "Default parameter group for memorydb_redis7"
+            Family: "memorydb_redis7"
+            Parameters: 
+              - 
+                Name: "acllog-max-len"
+                Value: "128"
+                Description: "The maximum length of the ACL Log"
+                DataType: "integer"
+                AllowedValues: "1-10000"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "activedefrag"
+                Value: "no"
+                Description: "Enabled active memory defragmentation"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-defrag-cycle-max"
+                Value: "75"
+                Description: "Maximal effort for defrag in CPU percentage"
+                DataType: "integer"
+                AllowedValues: "1-75"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-defrag-cycle-min"
+                Value: "5"
+                Description: "Minimal effort for defrag in CPU percentage"
+                DataType: "integer"
+                AllowedValues: "1-75"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-defrag-ignore-bytes"
+                Value: "104857600"
+                Description: "Minimum amount of fragmentation waste to start active defrag"
+                DataType: "integer"
+                AllowedValues: "1048576-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-defrag-max-scan-fields"
+                Value: "1000"
+                Description: "Maximum number of set/hash/zset/list fields that will be processed from the main dictionary scan"
+                DataType: "integer"
+                AllowedValues: "1-1000000"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-defrag-threshold-lower"
+                Value: "10"
+                Description: "Minimum percentage of fragmentation to start active defrag"
+                DataType: "integer"
+                AllowedValues: "1-100"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-defrag-threshold-upper"
+                Value: "100"
+                Description: "Maximum percentage of fragmentation at which we use maximum effort"
+                DataType: "integer"
+                AllowedValues: "1-100"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-expire-effort"
+                Value: "1"
+                Description: "The amount of effort that redis uses to expire items in the active expiration job"
+                DataType: "integer"
+                AllowedValues: "1-10"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "client-output-buffer-limit-normal-hard-limit"
+                Value: "0"
+                Description: "Normal client output buffer hard limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "client-output-buffer-limit-normal-soft-limit"
+                Value: "0"
+                Description: "Normal client output buffer soft limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "client-output-buffer-limit-normal-soft-seconds"
+                Value: "0"
+                Description: "Normal client output buffer soft limit in seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "client-output-buffer-limit-pubsub-hard-limit"
+                Value: "33554432"
+                Description: "Pubsub client output buffer hard limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "client-output-buffer-limit-pubsub-soft-limit"
+                Value: "8388608"
+                Description: "Pubsub client output buffer soft limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "client-output-buffer-limit-pubsub-soft-seconds"
+                Value: "60"
+                Description: "Pubsub client output buffer soft limit in seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "hash-max-listpack-entries"
+                Value: "512"
+                Description: "The maximum number of hash entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "hash-max-listpack-value"
+                Value: "64"
+                Description: "The threshold of biggest hash entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "hll-sparse-max-bytes"
+                Value: "3000"
+                Description: "HyperLogLog sparse representation bytes limit"
+                DataType: "integer"
+                AllowedValues: "1-16000"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "latency-tracking"
+                Value: "no"
+                Description: "Track the per command latencies and enable exporting the percentile distribution via the INFO latencystats command and cumulative latency distributions (histograms) via the LATENCY command."
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "lazyfree-lazy-eviction"
+                Value: "no"
+                Description: "Perform an asynchronous delete on evictions"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "lazyfree-lazy-expire"
+                Value: "no"
+                Description: "Perform an asynchronous delete on expired keys"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "lazyfree-lazy-server-del"
+                Value: "no"
+                Description: "Perform an asynchronous delete on key updates"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "lazyfree-lazy-user-del"
+                Value: "no"
+                Description: "Specifies whether the default behavior of DEL command acts the same as UNLINK"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "lfu-decay-time"
+                Value: "1"
+                Description: "The amount of time in minutes to decrement the key counter for LFU eviction policyd"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "lfu-log-factor"
+                Value: "10"
+                Description: "The log factor for incrementing key counter for LFU eviction policy"
+                DataType: "integer"
+                AllowedValues: "1-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "list-compress-depth"
+                Value: "0"
+                Description: "Number of quicklist ziplist nodes from each side of the list to exclude from compression. The head and tail of the list are always uncompressed for fast push/pop operations"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "maxmemory-policy"
+                Value: "noeviction"
+                Description: "Max memory policy"
+                DataType: "string"
+                AllowedValues: "volatile-lru,allkeys-lru,volatile-lfu,allkeys-lfu,volatile-random,allkeys-random,volatile-ttl,noeviction"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "maxmemory-samples"
+                Value: "3"
+                Description: "Max memory samples"
+                DataType: "integer"
+                AllowedValues: "1-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "notify-keyspace-events"
+                Description: "The keyspace events for Redis to notify Pub/Sub clients about. By default all notifications are disabled"
+                DataType: "string"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "search-enabled"
+                Value: "no"
+                Description: "When set to yes, it enables search capabilities."
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.1.1"
+              - 
+                Name: "search-query-timeout-ms"
+                Value: "10000"
+                Description: "The maximum amount of time in milliseconds that a search query is allowed to run."
+                DataType: "integer"
+                AllowedValues: "1-60000"
+                MinimumEngineVersion: "7.1.1"
+              - 
+                Name: "set-max-intset-entries"
+                Value: "512"
+                Description: "The limit in the size of the set in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "slowlog-log-slower-than"
+                Value: "10000"
+                Description: "The execution time, in microseconds, to exceed in order for the command to get logged. Note that a negative number disables the slow log, while a value of zero forces the logging of every command"
+                DataType: "integer"
+                AllowedValues: "-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "slowlog-max-len"
+                Value: "128"
+                Description: "The length of the slow log. There is no limit to this length. Just be aware that it will consume memory. You can reclaim memory used by the slow log with SLOWLOG RESET."
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "stream-node-max-bytes"
+                Value: "4096"
+                Description: "The maximum size of a single node in a stream in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "stream-node-max-entries"
+                Value: "100"
+                Description: "The maximum number of items a single node in a stream can contain"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "tcp-keepalive"
+                Value: "300"
+                Description: "If non-zero, send ACKs every given number of seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "timeout"
+                Value: "0"
+                Description: "Close connection if client is idle for a given number of seconds, or never if 0"
+                DataType: "integer"
+                AllowedValues: "0,20-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "tracking-table-max-keys"
+                Value: "1000000"
+                Description: "The maximum number of keys allowed for the tracking table for client side caching"
+                DataType: "integer"
+                AllowedValues: "1-100000000"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "zset-max-listpack-entries"
+                Value: "128"
+                Description: "The maximum number of sorted set entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "zset-max-listpack-value"
+                Value: "64"
+                Description: "The threshold of biggest sorted set entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+
+    MemoryDBParameterGroup3:
+        Type: "AWS::MemoryDB::ParameterGroup"
+        Properties:
+            Description: "Default parameter group for memorydb_valkey7"
+            Family: "memorydb_valkey7"
+            Parameters: 
+              - 
+                Name: "acllog-max-len"
+                Value: "128"
+                Description: "The maximum length of the ACL Log"
+                DataType: "integer"
+                AllowedValues: "1-10000"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "activedefrag"
+                Value: "no"
+                Description: "Enabled active memory defragmentation"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-defrag-cycle-max"
+                Value: "75"
+                Description: "Maximal effort for defrag in CPU percentage"
+                DataType: "integer"
+                AllowedValues: "1-75"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-defrag-cycle-min"
+                Value: "5"
+                Description: "Minimal effort for defrag in CPU percentage"
+                DataType: "integer"
+                AllowedValues: "1-75"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-defrag-ignore-bytes"
+                Value: "104857600"
+                Description: "Minimum amount of fragmentation waste to start active defrag"
+                DataType: "integer"
+                AllowedValues: "1048576-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-defrag-max-scan-fields"
+                Value: "1000"
+                Description: "Maximum number of set/hash/zset/list fields that will be processed from the main dictionary scan"
+                DataType: "integer"
+                AllowedValues: "1-1000000"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-defrag-threshold-lower"
+                Value: "10"
+                Description: "Minimum percentage of fragmentation to start active defrag"
+                DataType: "integer"
+                AllowedValues: "1-100"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-defrag-threshold-upper"
+                Value: "100"
+                Description: "Maximum percentage of fragmentation at which we use maximum effort"
+                DataType: "integer"
+                AllowedValues: "1-100"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-expire-effort"
+                Value: "1"
+                Description: "The amount of effort that redis uses to expire items in the active expiration job"
+                DataType: "integer"
+                AllowedValues: "1-10"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "client-output-buffer-limit-normal-hard-limit"
+                Value: "0"
+                Description: "Normal client output buffer hard limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "client-output-buffer-limit-normal-soft-limit"
+                Value: "0"
+                Description: "Normal client output buffer soft limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "client-output-buffer-limit-normal-soft-seconds"
+                Value: "0"
+                Description: "Normal client output buffer soft limit in seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "client-output-buffer-limit-pubsub-hard-limit"
+                Value: "33554432"
+                Description: "Pubsub client output buffer hard limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "client-output-buffer-limit-pubsub-soft-limit"
+                Value: "8388608"
+                Description: "Pubsub client output buffer soft limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "client-output-buffer-limit-pubsub-soft-seconds"
+                Value: "60"
+                Description: "Pubsub client output buffer soft limit in seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "hash-max-listpack-entries"
+                Value: "512"
+                Description: "The maximum number of hash entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "hash-max-listpack-value"
+                Value: "64"
+                Description: "The threshold of biggest hash entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "hll-sparse-max-bytes"
+                Value: "3000"
+                Description: "HyperLogLog sparse representation bytes limit"
+                DataType: "integer"
+                AllowedValues: "1-16000"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "latency-tracking"
+                Value: "no"
+                Description: "Track the per command latencies and enable exporting the percentile distribution via the INFO latencystats command and cumulative latency distributions (histograms) via the LATENCY command."
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "lazyfree-lazy-eviction"
+                Value: "no"
+                Description: "Perform an asynchronous delete on evictions"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "lazyfree-lazy-expire"
+                Value: "no"
+                Description: "Perform an asynchronous delete on expired keys"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "lazyfree-lazy-server-del"
+                Value: "no"
+                Description: "Perform an asynchronous delete on key updates"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "lazyfree-lazy-user-del"
+                Value: "no"
+                Description: "Specifies whether the default behavior of DEL command acts the same as UNLINK"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "lfu-decay-time"
+                Value: "1"
+                Description: "The amount of time in minutes to decrement the key counter for LFU eviction policyd"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "lfu-log-factor"
+                Value: "10"
+                Description: "The log factor for incrementing key counter for LFU eviction policy"
+                DataType: "integer"
+                AllowedValues: "1-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "list-compress-depth"
+                Value: "0"
+                Description: "Number of quicklist ziplist nodes from each side of the list to exclude from compression. The head and tail of the list are always uncompressed for fast push/pop operations"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "maxmemory-policy"
+                Value: "noeviction"
+                Description: "Max memory policy"
+                DataType: "string"
+                AllowedValues: "volatile-lru,allkeys-lru,volatile-lfu,allkeys-lfu,volatile-random,allkeys-random,volatile-ttl,noeviction"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "maxmemory-samples"
+                Value: "3"
+                Description: "Max memory samples"
+                DataType: "integer"
+                AllowedValues: "1-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "notify-keyspace-events"
+                Description: "The keyspace events for Redis to notify Pub/Sub clients about. By default all notifications are disabled"
+                DataType: "string"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "search-enabled"
+                Value: "no"
+                Description: "When set to yes, it enables search capabilities."
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "search-query-timeout-ms"
+                Value: "10000"
+                Description: "The maximum amount of time in milliseconds that a search query is allowed to run."
+                DataType: "integer"
+                AllowedValues: "1-60000"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "set-max-intset-entries"
+                Value: "512"
+                Description: "The limit in the size of the set in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "slowlog-log-slower-than"
+                Value: "10000"
+                Description: "The execution time, in microseconds, to exceed in order for the command to get logged. Note that a negative number disables the slow log, while a value of zero forces the logging of every command"
+                DataType: "integer"
+                AllowedValues: "-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "slowlog-max-len"
+                Value: "128"
+                Description: "The length of the slow log. There is no limit to this length. Just be aware that it will consume memory. You can reclaim memory used by the slow log with SLOWLOG RESET."
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "stream-node-max-bytes"
+                Value: "4096"
+                Description: "The maximum size of a single node in a stream in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "stream-node-max-entries"
+                Value: "100"
+                Description: "The maximum number of items a single node in a stream can contain"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "tcp-keepalive"
+                Value: "300"
+                Description: "If non-zero, send ACKs every given number of seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "timeout"
+                Value: "0"
+                Description: "Close connection if client is idle for a given number of seconds, or never if 0"
+                DataType: "integer"
+                AllowedValues: "0,20-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "tracking-table-max-keys"
+                Value: "1000000"
+                Description: "The maximum number of keys allowed for the tracking table for client side caching"
+                DataType: "integer"
+                AllowedValues: "1-100000000"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "zset-max-listpack-entries"
+                Value: "128"
+                Description: "The maximum number of sorted set entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "zset-max-listpack-value"
+                Value: "64"
+                Description: "The threshold of biggest sorted set entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+
+    MemoryDBParameterGroup4:
+        Type: "AWS::MemoryDB::ParameterGroup"
+        Properties:
+            Description: "Customized default parameter group for memorydb_redis7 with search-enabled yes"
+            Family: "memorydb_redis7"
+            Parameters: 
+              - 
+                Name: "acllog-max-len"
+                Value: "128"
+                Description: "The maximum length of the ACL Log"
+                DataType: "integer"
+                AllowedValues: "1-10000"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "activedefrag"
+                Value: "no"
+                Description: "Enabled active memory defragmentation"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-defrag-cycle-max"
+                Value: "75"
+                Description: "Maximal effort for defrag in CPU percentage"
+                DataType: "integer"
+                AllowedValues: "1-75"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-defrag-cycle-min"
+                Value: "5"
+                Description: "Minimal effort for defrag in CPU percentage"
+                DataType: "integer"
+                AllowedValues: "1-75"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-defrag-ignore-bytes"
+                Value: "104857600"
+                Description: "Minimum amount of fragmentation waste to start active defrag"
+                DataType: "integer"
+                AllowedValues: "1048576-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-defrag-max-scan-fields"
+                Value: "1000"
+                Description: "Maximum number of set/hash/zset/list fields that will be processed from the main dictionary scan"
+                DataType: "integer"
+                AllowedValues: "1-1000000"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-defrag-threshold-lower"
+                Value: "10"
+                Description: "Minimum percentage of fragmentation to start active defrag"
+                DataType: "integer"
+                AllowedValues: "1-100"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-defrag-threshold-upper"
+                Value: "100"
+                Description: "Maximum percentage of fragmentation at which we use maximum effort"
+                DataType: "integer"
+                AllowedValues: "1-100"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "active-expire-effort"
+                Value: "1"
+                Description: "The amount of effort that redis uses to expire items in the active expiration job"
+                DataType: "integer"
+                AllowedValues: "1-10"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "client-output-buffer-limit-normal-hard-limit"
+                Value: "0"
+                Description: "Normal client output buffer hard limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "client-output-buffer-limit-normal-soft-limit"
+                Value: "0"
+                Description: "Normal client output buffer soft limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "client-output-buffer-limit-normal-soft-seconds"
+                Value: "0"
+                Description: "Normal client output buffer soft limit in seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "client-output-buffer-limit-pubsub-hard-limit"
+                Value: "33554432"
+                Description: "Pubsub client output buffer hard limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "client-output-buffer-limit-pubsub-soft-limit"
+                Value: "8388608"
+                Description: "Pubsub client output buffer soft limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "client-output-buffer-limit-pubsub-soft-seconds"
+                Value: "60"
+                Description: "Pubsub client output buffer soft limit in seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "hash-max-listpack-entries"
+                Value: "512"
+                Description: "The maximum number of hash entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "hash-max-listpack-value"
+                Value: "64"
+                Description: "The threshold of biggest hash entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "hll-sparse-max-bytes"
+                Value: "3000"
+                Description: "HyperLogLog sparse representation bytes limit"
+                DataType: "integer"
+                AllowedValues: "1-16000"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "latency-tracking"
+                Value: "no"
+                Description: "Track the per command latencies and enable exporting the percentile distribution via the INFO latencystats command and cumulative latency distributions (histograms) via the LATENCY command."
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "lazyfree-lazy-eviction"
+                Value: "no"
+                Description: "Perform an asynchronous delete on evictions"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "lazyfree-lazy-expire"
+                Value: "no"
+                Description: "Perform an asynchronous delete on expired keys"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "lazyfree-lazy-server-del"
+                Value: "no"
+                Description: "Perform an asynchronous delete on key updates"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "lazyfree-lazy-user-del"
+                Value: "no"
+                Description: "Specifies whether the default behavior of DEL command acts the same as UNLINK"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "lfu-decay-time"
+                Value: "1"
+                Description: "The amount of time in minutes to decrement the key counter for LFU eviction policyd"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "lfu-log-factor"
+                Value: "10"
+                Description: "The log factor for incrementing key counter for LFU eviction policy"
+                DataType: "integer"
+                AllowedValues: "1-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "list-compress-depth"
+                Value: "0"
+                Description: "Number of quicklist ziplist nodes from each side of the list to exclude from compression. The head and tail of the list are always uncompressed for fast push/pop operations"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "maxmemory-policy"
+                Value: "noeviction"
+                Description: "Max memory policy"
+                DataType: "string"
+                AllowedValues: "volatile-lru,allkeys-lru,volatile-lfu,allkeys-lfu,volatile-random,allkeys-random,volatile-ttl,noeviction"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "maxmemory-samples"
+                Value: "3"
+                Description: "Max memory samples"
+                DataType: "integer"
+                AllowedValues: "1-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "notify-keyspace-events"
+                Description: "The keyspace events for Redis to notify Pub/Sub clients about. By default all notifications are disabled"
+                DataType: "string"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "search-enabled"
+                Value: "yes"
+                Description: "When set to yes, it enables search capabilities."
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.1.1"
+              - 
+                Name: "search-query-timeout-ms"
+                Value: "10000"
+                Description: "The maximum amount of time in milliseconds that a search query is allowed to run."
+                DataType: "integer"
+                AllowedValues: "1-60000"
+                MinimumEngineVersion: "7.1.1"
+              - 
+                Name: "set-max-intset-entries"
+                Value: "512"
+                Description: "The limit in the size of the set in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "slowlog-log-slower-than"
+                Value: "10000"
+                Description: "The execution time, in microseconds, to exceed in order for the command to get logged. Note that a negative number disables the slow log, while a value of zero forces the logging of every command"
+                DataType: "integer"
+                AllowedValues: "-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "slowlog-max-len"
+                Value: "128"
+                Description: "The length of the slow log. There is no limit to this length. Just be aware that it will consume memory. You can reclaim memory used by the slow log with SLOWLOG RESET."
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "stream-node-max-bytes"
+                Value: "4096"
+                Description: "The maximum size of a single node in a stream in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "stream-node-max-entries"
+                Value: "100"
+                Description: "The maximum number of items a single node in a stream can contain"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "tcp-keepalive"
+                Value: "300"
+                Description: "If non-zero, send ACKs every given number of seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "timeout"
+                Value: "0"
+                Description: "Close connection if client is idle for a given number of seconds, or never if 0"
+                DataType: "integer"
+                AllowedValues: "0,20-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "tracking-table-max-keys"
+                Value: "1000000"
+                Description: "The maximum number of keys allowed for the tracking table for client side caching"
+                DataType: "integer"
+                AllowedValues: "1-100000000"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "zset-max-listpack-entries"
+                Value: "128"
+                Description: "The maximum number of sorted set entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+              - 
+                Name: "zset-max-listpack-value"
+                Value: "64"
+                Description: "The threshold of biggest sorted set entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.0.5"
+
+    MemoryDBParameterGroup5:
+        Type: "AWS::MemoryDB::ParameterGroup"
+        Properties:
+            Description: "Customized default parameter group for memorydb_valkey7 with search-enabled yes"
+            Family: "memorydb_valkey7"
+            Parameters: 
+              - 
+                Name: "acllog-max-len"
+                Value: "128"
+                Description: "The maximum length of the ACL Log"
+                DataType: "integer"
+                AllowedValues: "1-10000"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "activedefrag"
+                Value: "no"
+                Description: "Enabled active memory defragmentation"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-defrag-cycle-max"
+                Value: "75"
+                Description: "Maximal effort for defrag in CPU percentage"
+                DataType: "integer"
+                AllowedValues: "1-75"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-defrag-cycle-min"
+                Value: "5"
+                Description: "Minimal effort for defrag in CPU percentage"
+                DataType: "integer"
+                AllowedValues: "1-75"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-defrag-ignore-bytes"
+                Value: "104857600"
+                Description: "Minimum amount of fragmentation waste to start active defrag"
+                DataType: "integer"
+                AllowedValues: "1048576-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-defrag-max-scan-fields"
+                Value: "1000"
+                Description: "Maximum number of set/hash/zset/list fields that will be processed from the main dictionary scan"
+                DataType: "integer"
+                AllowedValues: "1-1000000"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-defrag-threshold-lower"
+                Value: "10"
+                Description: "Minimum percentage of fragmentation to start active defrag"
+                DataType: "integer"
+                AllowedValues: "1-100"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-defrag-threshold-upper"
+                Value: "100"
+                Description: "Maximum percentage of fragmentation at which we use maximum effort"
+                DataType: "integer"
+                AllowedValues: "1-100"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "active-expire-effort"
+                Value: "1"
+                Description: "The amount of effort that redis uses to expire items in the active expiration job"
+                DataType: "integer"
+                AllowedValues: "1-10"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "client-output-buffer-limit-normal-hard-limit"
+                Value: "0"
+                Description: "Normal client output buffer hard limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "client-output-buffer-limit-normal-soft-limit"
+                Value: "0"
+                Description: "Normal client output buffer soft limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "client-output-buffer-limit-normal-soft-seconds"
+                Value: "0"
+                Description: "Normal client output buffer soft limit in seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "client-output-buffer-limit-pubsub-hard-limit"
+                Value: "33554432"
+                Description: "Pubsub client output buffer hard limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "client-output-buffer-limit-pubsub-soft-limit"
+                Value: "8388608"
+                Description: "Pubsub client output buffer soft limit in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "client-output-buffer-limit-pubsub-soft-seconds"
+                Value: "60"
+                Description: "Pubsub client output buffer soft limit in seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "hash-max-listpack-entries"
+                Value: "512"
+                Description: "The maximum number of hash entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "hash-max-listpack-value"
+                Value: "64"
+                Description: "The threshold of biggest hash entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "hll-sparse-max-bytes"
+                Value: "3000"
+                Description: "HyperLogLog sparse representation bytes limit"
+                DataType: "integer"
+                AllowedValues: "1-16000"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "latency-tracking"
+                Value: "no"
+                Description: "Track the per command latencies and enable exporting the percentile distribution via the INFO latencystats command and cumulative latency distributions (histograms) via the LATENCY command."
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "lazyfree-lazy-eviction"
+                Value: "no"
+                Description: "Perform an asynchronous delete on evictions"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "lazyfree-lazy-expire"
+                Value: "no"
+                Description: "Perform an asynchronous delete on expired keys"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "lazyfree-lazy-server-del"
+                Value: "no"
+                Description: "Perform an asynchronous delete on key updates"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "lazyfree-lazy-user-del"
+                Value: "no"
+                Description: "Specifies whether the default behavior of DEL command acts the same as UNLINK"
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "lfu-decay-time"
+                Value: "1"
+                Description: "The amount of time in minutes to decrement the key counter for LFU eviction policyd"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "lfu-log-factor"
+                Value: "10"
+                Description: "The log factor for incrementing key counter for LFU eviction policy"
+                DataType: "integer"
+                AllowedValues: "1-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "list-compress-depth"
+                Value: "0"
+                Description: "Number of quicklist ziplist nodes from each side of the list to exclude from compression. The head and tail of the list are always uncompressed for fast push/pop operations"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "maxmemory-policy"
+                Value: "noeviction"
+                Description: "Max memory policy"
+                DataType: "string"
+                AllowedValues: "volatile-lru,allkeys-lru,volatile-lfu,allkeys-lfu,volatile-random,allkeys-random,volatile-ttl,noeviction"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "maxmemory-samples"
+                Value: "3"
+                Description: "Max memory samples"
+                DataType: "integer"
+                AllowedValues: "1-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "notify-keyspace-events"
+                Description: "The keyspace events for Redis to notify Pub/Sub clients about. By default all notifications are disabled"
+                DataType: "string"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "search-enabled"
+                Value: "yes"
+                Description: "When set to yes, it enables search capabilities."
+                DataType: "string"
+                AllowedValues: "yes,no"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "search-query-timeout-ms"
+                Value: "10000"
+                Description: "The maximum amount of time in milliseconds that a search query is allowed to run."
+                DataType: "integer"
+                AllowedValues: "1-60000"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "set-max-intset-entries"
+                Value: "512"
+                Description: "The limit in the size of the set in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "slowlog-log-slower-than"
+                Value: "10000"
+                Description: "The execution time, in microseconds, to exceed in order for the command to get logged. Note that a negative number disables the slow log, while a value of zero forces the logging of every command"
+                DataType: "integer"
+                AllowedValues: "-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "slowlog-max-len"
+                Value: "128"
+                Description: "The length of the slow log. There is no limit to this length. Just be aware that it will consume memory. You can reclaim memory used by the slow log with SLOWLOG RESET."
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "stream-node-max-bytes"
+                Value: "4096"
+                Description: "The maximum size of a single node in a stream in bytes"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "stream-node-max-entries"
+                Value: "100"
+                Description: "The maximum number of items a single node in a stream can contain"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "tcp-keepalive"
+                Value: "300"
+                Description: "If non-zero, send ACKs every given number of seconds"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "timeout"
+                Value: "0"
+                Description: "Close connection if client is idle for a given number of seconds, or never if 0"
+                DataType: "integer"
+                AllowedValues: "0,20-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "tracking-table-max-keys"
+                Value: "1000000"
+                Description: "The maximum number of keys allowed for the tracking table for client side caching"
+                DataType: "integer"
+                AllowedValues: "1-100000000"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "zset-max-listpack-entries"
+                Value: "128"
+                Description: "The maximum number of sorted set entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+              - 
+                Name: "zset-max-listpack-value"
+                Value: "64"
+                Description: "The threshold of biggest sorted set entries in order for the dataset to be compressed"
+                DataType: "integer"
+                AllowedValues: "0-"
+                MinimumEngineVersion: "7.2.6"
+
