@@ -64,7 +64,7 @@ This ensures scalability, flexibility, and lower costs compared to heavy ETL job
 │   └── enrichment_lambda.py      # Lambda function to enrich tweets with sentiment (via SageMaker)  
 │
 ├── sagemaker/  
-│   └── deploy_model.py           # Script to deploy the sentiment analysis model as a SageMaker endpoint  
+│   └── deploy_model.py           # Deploying the sentiment analysis model as a SageMaker endpoint  
 │
 ├── sample_data/  
 │   ├── raw/                      # Example of scraped raw JSON tweets  
